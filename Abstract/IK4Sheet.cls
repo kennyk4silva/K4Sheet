@@ -73,3 +73,20 @@ Public Sub PartialSumFormulaR1C1(ByRef FormulaRange As Range, _
 ByVal CellsQuantity As Long, ByVal Direction As RangeDirection, _
 ByVal ColOrRowIndex As Long)
 End Sub
+
+Public Sub PercentFormulaR1C1(ByRef FormulaRange As Range, _
+ByVal CellsQuantity As Long, ByRef CellWithTotal As Range, _
+ByVal Direction As RangeDirection, ByVal ColOrRowIndex As Long, _
+Optional NumOfDecimals As Long = 2)
+End Sub
+
+Public Sub FactorFormulaR1C1(ByRef FormulaRange As Range, _
+ByVal CellsQuantity As Long, ByVal Direction As RangeDirection, _
+ByVal ColOrRowIndex As Long, ByVal Factor As Double, _
+Optional NumOfDecimals As Long = 2)
+End Sub
+
+Public Sub CellsSumFormulaR1C1(ByRef FormulaRange As Range, _
+ByVal CellsQuantity As Long, ByVal Direction As RangeDirection, _
+ParamArray RowOrColIndexes() As Variant)
+End Sub

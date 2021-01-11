@@ -281,3 +281,68 @@ ByVal ColOrRowIndex As Long)
     FormulaRange.Cells(1, 1).FormulaR1C1 = "=RC[" & Offset & "]"
   End If
 End Sub
+
+Private Sub ISheetWorker_PercentFormulaR1C1(ByRef FormulaRange As Range, _
+ByVal CellsQuantity As Long, ByRef CellWithTotal As Range, _
+ByVal Direction As RangeDirection, ByVal ColOrRowIndex As Long, _
+Optional NumOfDecimals As Long = 2&)
+  Dim TotalAbsoluteRef As String
+  TotalAbsoluteRef = "R" & CellWithTotal.Row & "C" & CellWithTotal.Column
+  Dim Formula As String
+  If Direction = Horizontal Then
+    Dim IndexRowOffset As Long
+    IndexRowOffset = ColOrRowIndex - FormulaRange.Cells(1, 1).Row
+    Formula = "=ROUND(R[" & IndexRowOffset & "]C/" & TotalAbsoluteRef & "," & _
+    NumOfDecimals & ")"
+    FormulaRange.Resize(1, CellsQuantity).FormulaR1C1 = Formula
+  Else
+    Dim IndexColOffset As Long
+    IndexColOffset = ColOrRowIndex - FormulaRange.Cells(1, 1).Column
+    Formula = "=ROUND(RC[" & IndexColOffset & "]/" & TotalAbsoluteRef & "," & _
+    NumOfDecimals & ")"
+    FormulaRange.Resize(CellsQuantity, 1).FormulaR1C1 = Formula
+  End If
+  FormulaRange.Resize(CellsQuantity, 1).NumberFormat = "0.00%"
+End Sub
+
+Private Sub ISheetWorker_FactorFormulaR1C1(ByRef FormulaRange As Range, _
+ByVal CellsQuantity As Long, ByVal Direction As RangeDirection, _
+ByVal ColOrRowIndex As Long, ByVal Factor As Double, _
+Optional NumOfDecimals As Long = 2&)
+  Dim Offset As Long
+  Dim Formula As String
+  If Direction = Horizontal Then
+    Offset = ColOrRowIndex - FormulaRange.Cells(1, 1).Row
+    Formula = "=ROUND(" & Factor & "*R[" & Offset & "]C," & NumOfDecimals & ")"
+    FormulaRange.Resize(1, CellsQuantity).FormulaR1C1 = Formula
+  Else
+    Offset = ColOrRowIndex - FormulaRange.Cells(1, 1).Column
+    Formula = "=ROUND(" & Factor & "*RC[" & Offset & "]," & NumOfDecimals & ")"
+    FormulaRange.Resize(CellsQuantity, 1).FormulaR1C1 = Formula
+  End If
+  FormulaRange.Resize(CellsQuantity, 1).NumberFormat = "#,##0.00"
+End Sub
+
+Private Sub ISheetWorker_CellsSumFormulaR1C1(ByRef FormulaRange As Range, _
+ByVal CellsQuantity As Long, ByVal Direction As RangeDirection, _
+ParamArray RowOrColIndexes() As Variant)
+  Dim Formula As String
+  Formula = "="
+  Dim Offset As Long
+  Dim Index As Long
+  If Direction = Horizontal Then
+    For Index = 0 To UBound(RowOrColIndexes)
+      Offset = RowOrColIndexes(Index) - FormulaRange.Cells(1, 1).Row
+      Formula = Formula & "R[" & Offset & "]C+"
+    Next Index
+    FormulaRange.Resize(1, CellsQuantity).FormulaR1C1 = Left(Formula, Len(Formula) - 1)
+    FormulaRange.Resize(1, CellsQuantity).NumberFormat = "#,##0.00"
+  Else
+    For Index = 0 To UBound(RowOrColIndexes)
+      Offset = RowOrColIndexes(Index) - FormulaRange.Cells(1, 1).Column
+      Formula = Formula & "RC[" & Offset & "]+"
+    Next Index
+    FormulaRange.Resize(CellsQuantity, 1).FormulaR1C1 = Left(Formula, Len(Formula) - 1)
+    FormulaRange.Resize(CellsQuantity, 1).NumberFormat = "#,##0.00"
+  End If
+End Sub
