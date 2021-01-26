@@ -72,73 +72,87 @@ Attribute Create.VB_Description = "Constructor method."
     End With
 End Function
 
-'Description("Gets an instance of the current class.")
+'@Description("Gets an instance of the current class.")
 Public Property Get Self() As IK4Sheet
+Attribute Self.VB_Description = "Gets an instance of the current class."
     Set Self = Me
 End Property
 
-'Description("Gets the current optimization mode.")
+'@Description("Gets the current optimization mode.")
 Public Property Get OptimizationMode() As k4OptimizationMode
+Attribute OptimizationMode.VB_Description = "Gets the current optimization mode."
     OptimizationMode = This.OptimizationMode
 End Property
 
-'Description("Gets the current optimization mode (interface).")
+'@Description("Gets the current optimization mode (interface).")
 Private Property Get IK4Sheet_OptimizationMode() As k4OptimizationMode
+Attribute IK4Sheet_OptimizationMode.VB_Description = "Gets the current optimization mode (interface)."
     IK4Sheet_OptimizationMode = OptimizationMode
 End Property
 
-'Description("Sets the optimization mode.")
+'@Description("Sets the optimization mode.")
 Public Property Let OptimizationMode(Value As k4OptimizationMode)
+Attribute OptimizationMode.VB_Description = "Sets the optimization mode."
     This.OptimizationMode = Value
 End Property
 
-'Description("Gets the current Excel Application ScreenUpdating property.")
+'@Description("Gets the current Excel Application ScreenUpdating property.")
 Public Property Get CurrentScreenUpdating() As Boolean
+Attribute CurrentScreenUpdating.VB_Description = "Gets the current Excel Application ScreenUpdating property."
     CurrentScreenUpdating = This.CurrentScreenUpdating
 End Property
 
-'Description("Gets the current Excel Application ScreenUpdating property (interface).")
+'@Description("Gets the current Excel Application ScreenUpdating property (interface).")
 Private Property Get IK4Sheet_CurrentScreenUpdating() As Boolean
+Attribute IK4Sheet_CurrentScreenUpdating.VB_Description = "Gets the current Excel Application ScreenUpdating property (interface)."
     IK4Sheet_CurrentScreenUpdating = CurrentScreenUpdating
 End Property
 
-'Description("Sets the Excel Application ScreenUpdating property.")
+'@Description("Sets the Excel Application ScreenUpdating property.")
 Public Property Let CurrentScreenUpdating(Value As Boolean)
+Attribute CurrentScreenUpdating.VB_Description = "Sets the Excel Application ScreenUpdating property."
     This.CurrentScreenUpdating = Value
 End Property
 
-'Description("Gets the current Excel Application Calculation property.")
+'@Description("Gets the current Excel Application Calculation property.")
 Public Property Get CurrentCalculation() As Excel.XlCalculation
+Attribute CurrentCalculation.VB_Description = "Gets the current Excel Application Calculation property."
     CurrentCalculation = This.CurrentCalculation
 End Property
 
-'Description("Gets the current Excel Application Calculation property (interface).")
+'@Description("Gets the current Excel Application Calculation property (interface).")
 Private Property Get IK4Sheet_CurrentCalculation() As Excel.XlCalculation
+Attribute IK4Sheet_CurrentCalculation.VB_Description = "Gets the current Excel Application Calculation property (interface)."
     IK4Sheet_CurrentCalculation = CurrentCalculation
 End Property
 
-'Description("Sets the Excel Application Calculation property.")
+'@Description("Sets the Excel Application Calculation property.")
 Public Property Let CurrentCalculation(Value As Excel.XlCalculation)
+Attribute CurrentCalculation.VB_Description = "Sets the Excel Application Calculation property."
     This.CurrentCalculation = Value
 End Property
 
-'Description("Gets the current Excel Application EnableEvents property.")
+'@Description("Gets the current Excel Application EnableEvents property.")
 Public Property Let CurrentEnableEvents(Value As Boolean)
+Attribute CurrentEnableEvents.VB_Description = "Gets the current Excel Application EnableEvents property."
     This.CurrentEnableEvents = Value
 End Property
 
-'Description("Gets the current Excel Application EnableEvents property (interface).")
+'@Description("Gets the current Excel Application EnableEvents property (interface).")
 Private Property Get IK4Sheet_CurrentEnableEvents() As Boolean
+Attribute IK4Sheet_CurrentEnableEvents.VB_Description = "Gets the current Excel Application EnableEvents property (interface)."
     IK4Sheet_CurrentEnableEvents = CurrentEnableEvents
 End Property
 
-'Description("Sets the Excel Application EnableEvents property.")
+'@Description("Sets the Excel Application EnableEvents property.")
 Public Property Get CurrentEnableEvents() As Boolean
+Attribute CurrentEnableEvents.VB_Description = "Sets the Excel Application EnableEvents property."
     CurrentEnableEvents = This.CurrentEnableEvents
 End Property
 
-'Description("Terminate event (after the object is unloaded).")
+'@Description("Terminate event (after the object is unloaded).")
 Private Sub Class_Terminate()
+Attribute Class_Terminate.VB_Description = "Terminate event (after the object is unloaded)."
     'Restore the original Excel optimization properties before instanciating the class.
     Application.ScreenUpdating = CurrentScreenUpdating
     Application.Calculation = CurrentCalculation
