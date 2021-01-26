@@ -10,6 +10,15 @@ Attribute VB_Exposed = False
 '@Folder("Classes.Abstract")
 Option Explicit
 
+'**********
+'* Enums  *
+'**********
+Public Enum k4OptimizationMode
+    k4NotOptimize
+    k4WithEvents = 1985
+    k4WithoutEvents
+End Enum
+
 Public Enum RangeDirection
   Horizontal
   Vertical
